@@ -10,7 +10,9 @@ def load_tasks():
 
 def save_tasks(tasks):
     with open(FILE, "w", encoding="utf-8") as f:
-        json.dump(tasks, f, indent=2, ensure_ascii=False)   
+        json.dump(tasks, f, indent=2, ensure_ascii=False)  
+
+ 
 
 
 # if __name__ == "__main__":
