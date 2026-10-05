@@ -1,22 +1,20 @@
 import json,os
 
-FILE = "tasks.json"
+DEFAULT_FILE = "tasks.json"
 
-def load_tasks():
-    if not os.path.exists(FILE):
+def load_tasks(file_path=DEFAULT_FILE):
+    if not os.path.exists(file_path):
         return []
-    with open(FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read().strip()
+        if not content:
+            return []
+        return json.loads(content)
 
-def save_tasks(tasks):
-    with open(FILE, "w", encoding="utf-8") as f:
-        json.dump(tasks, f, indent=2, ensure_ascii=False)  
+def save_tasks(tasks, file_path=DEFAULT_FILE):
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(tasks, f, indent=2, ensure_ascii=False)
+
 
  
 
-
-# if __name__ == "__main__":
-#     tasks = load_tasks()
-#     tasks.append({"id": 1, "description": "test", "status": "todo"})
-#     save_tasks(tasks)
-#     print(load_tasks())

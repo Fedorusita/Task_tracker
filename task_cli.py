@@ -58,9 +58,11 @@ def mark_task(task_id, new_status):
     print(f"Error: task with ID {task_id} not found")
 
 
-# Вывод всего списка задач
-def list_task():
+# Вывод списка задач
+def list_task(status=None):
     tasks = load_tasks()
+    if status:
+        tasks = [t for t in tasks if t["status"] == status]
     if not tasks:
         print("No tasks found")
         return
@@ -127,10 +129,11 @@ def main():
         mark_task(task_id, "done")
 
     elif command == "list":
+        status = sys.argv[2] if len(sys.argv) > 2 else None
         if len(sys.argv) < 2:
             print("Error: mark-done requires <id>")
             return
-        list_task()
+        list_task(status)
 
     else:
         print(f"Unknown command: {command}")
